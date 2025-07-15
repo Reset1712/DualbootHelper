@@ -2,10 +2,10 @@ name: Android CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "david42069-testbranch" ]
+
   pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
+    branches: [ "david42069-testbranch" ]
 
 jobs:
   build:
@@ -36,7 +36,6 @@ jobs:
           ./gradlew assembleRelease
           find . -type f -name "*.apk"
           chmod +x uploadtg.sh
-
     - name: upload to tg
       env:
         CHAT_ID: ${{ secrets.CHAT_ID }}
