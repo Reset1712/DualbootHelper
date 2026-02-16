@@ -12,11 +12,11 @@ def locales = file('src/main/res').listFiles(new FilenameFilter() {
 print("Locales: " + locales.join(', '))
 
 android {
-    namespace 'com.david42069.dualboothelper' /*TODO: change packageName*/
+    namespace 'com.david42069.dualboothelper'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.david42069.dualboothelper" /*TODO: change packageName*/
+        applicationId "com.david42069.dualboothelper"
         minSdk 26
         targetSdk 33
         versionCode 4
@@ -32,27 +32,13 @@ android {
         viewBinding true
     }
 
-    signingConfigs {
-        release {
-            storeFile file("../release_key.jks")
-            storePassword System.getenv("KEYSTORE_PASSWORD")
-            keyAlias System.getenv("KEY_ALIAS")
-            keyPassword System.getenv("KEYSTORE_PASSWORD")
-
-            enableV1Signing = true
-            enableV2Signing = true
-            enableV3Signing = true
-            enableV4Signing = true
-        }
-    }
-
     buildTypes {
         release {
             minifyEnabled true
-            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -93,14 +79,8 @@ dependencies {
 
 dependencies {
     def libsuVersion = '6.0.0'
-
-    // The core module that provides APIs to a shell
     implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
-
-    // Optional: APIs for creating root services. Depends on ":core"
     implementation "com.github.topjohnwu.libsu:service:${libsuVersion}"
-
-    // Optional: Provides remote file system support
     implementation "com.github.topjohnwu.libsu:nio:${libsuVersion}"
 }
 
